@@ -29,6 +29,9 @@
             <groupId>com.javarush</groupId>
             <artifactId>desktop-game-engine</artifactId>
             <version>1.0</version>
+            <!--add path to custom dependency -->
+            <scope>system</scope>
+            <systemPath>${basedir}/lib/desktop-game-engine.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
@@ -56,25 +59,25 @@
                     <encoding>UTF-8</encoding>
                 </configuration>
             </plugin>
-            <!-- add custom dependency from javarush -->
+            <!-- install in local repository dependency from javarush -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-install-plugin</artifactId>
                 <version>3.1.1</version>
+                <configuration>
+                    <file>${project.basedir}/lib/desktop-game-engine.jar</file>
+                    <groupId>com.javarush</groupId>
+                    <artifactId>desktop-game-engine</artifactId>
+                    <version>1.0</version>
+                    <packaging>jar</packaging>
+                </configuration>
                 <executions>
                     <execution>
-                        <id>install-custom-lib</id>
+                        <id>install-file-jar</id>
+                        <phase>initialize</phase>
                         <goals>
                             <goal>install-file</goal>
                         </goals>
-                        <phase>initialize</phase>
-                        <configuration>
-                            <file>${project.basedir}/lib/desktop-game-engine.jar</file>
-                            <groupId>com.javarush</groupId>
-                            <artifactId>desktop-game-engine</artifactId>
-                            <version>1.0</version>
-                            <packaging>jar</packaging>
-                        </configuration>
                     </execution>
                 </executions>
             </plugin>
